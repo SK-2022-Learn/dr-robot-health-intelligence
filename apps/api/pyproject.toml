@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dr-robot-api"
+version = "1.0.0"
+description = "FastAPI foundation for Dr. Robot"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.14,<2.0",
+    "fastapi>=0.115,<1.0",
+    "langgraph>=1.0,<2.0",
+    "pillow>=11.0,<13.0",
+    "pinecone>=7.0,<9.0",
+    "pydantic-settings>=2.7,<3.0",
+    "pymupdf>=1.25,<2.0",
+    "python-multipart>=0.0.20,<1.0",
+    "sqlalchemy>=2.0,<3.0",
+    "uvicorn[standard]>=0.34,<1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "httpx>=0.28,<1.0",
+    "pytest>=8.3,<9.0",
+    "ruff>=0.9,<1.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+addopts = "-q -p no:cacheprovider --basetemp=../../.tmp/pytest"
+pythonpath = [".", "../..", "../../scripts"]
+testpaths = ["tests"]
+
+[tool.ruff]
+exclude = [".venv", ".ruff_cache", ".pytest_*", "pytest-cache-files-*"]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

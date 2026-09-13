@@ -1,0 +1,14 @@
+.git
+.env
+.env.*
+!.env.example
+**/.venv
+**/node_modules
+**/.next
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
+.tmp
+pytest*
+data/dr_robot.db*
+data/uploads/*

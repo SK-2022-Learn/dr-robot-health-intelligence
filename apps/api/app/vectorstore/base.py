@@ -1,0 +1,19 @@
+"""Provider-neutral vector store contract."""
+
+from typing import Protocol
+
+from app.vectorstore.types import IndexInfo, VectorMatch, VectorRecord
+
+
+class VectorStoreProvider(Protocol):
+    def health_check(self) -> bool: ...
+
+    def upsert_chunks(self, profile_id: str, chunks: list[VectorRecord]) -> int: ...
+
+    def query(self, profile_id: str, vector: list[float], top_k: int) -> list[VectorMatch]: ...
+
+    def delete_document(self, document_id: str, profile_id: str) -> None: ...
+
+    def delete_profile(self, profile_id: str) -> None: ...
+
+    def get_index_info(self) -> IndexInfo: ...
